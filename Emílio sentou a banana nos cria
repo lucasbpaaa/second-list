@@ -32,3 +32,16 @@ print(a)
 a.append(4)
 a.append(5)
 print(a)
+
+#Question 2:
+
+class ToroArray:
+
+    def __init__(self, array): #Vamos construir um array
+        self.array = array
+    
+    def __getitem__(self, index): #Para saber o índice correspondente ao inteiro usado ( index ), basta ver o resto desse índice na divisão pelo número que representa o tamanho do array. 
+        return self.array[index % len(self.array)] #O resto dessa divisão corresponde ao índice do elemento procurado no array
+
+tr = ToroArray([10, 11, 12, 13, 14])
+print(tr[-20])
