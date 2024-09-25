@@ -1,6 +1,7 @@
 #Question 1:
 
 import numpy as np
+import time
 
 class My_Array:
     def __init__(self):
@@ -8,21 +9,56 @@ class My_Array:
         self.capacity = 1
         self.array = np.zeros(self.capacity)
 
-    def append(self, number : float):
-
-        if self.capacity == self.size: #Verifica se a capacidade foi atingida. Caso isso tenha acontecido, vamos dobrar a capacidade e criar um novo array.
-            self.capacity = 2*self.capacity
+    def append(self, number: float):
+        if self.capacity == self.size:  # Verifica se a capacidade foi atingida
+            self.capacity = 2 * self.capacity
             new_list = np.zeros(self.capacity)
-            for i in range(self.array.size):
-                new_list[i] += self.array[i]
-            self.array = new_list #Atualizamos o array
-        if self.size < self.capacity: #Enquanto a capacidade não estiver lotada, vamos adicionando elementos
+            for i in range(self.size):  # Corrigido para usar self.size
+                new_list[i] = self.array[i]
+            self.array = new_list  # Atualizamos o array
+
+        if self.size < self.capacity:  # Adiciona elementos
             self.array[self.size] = number
             self.size += 1
-        return self.array
 
-    def __str__(self): #Aqui criamos um método para mostrar o array
-        return 'The array is {}'.format(self.array)
+    def __str__(self):
+        return 'The array is {}'.format(self.array[:self.size])  # Mostra apenas os elementos válidos
+    
+
+''''
+Agora, vamos comparar os tempos dessa implementação com a lista do python. Esperamos que a lista do python seja mais rápida.
+'''
+
+# Função para medir o tempo de append em My_Array
+def test_my_array(n):
+    my_array = My_Array()
+    start_time = time.time()
+    for i in range(n):
+        my_array.append(i)
+    end_time = time.time()
+    return end_time - start_time
+
+# Função para medir o tempo de append em uma lista do Python
+def test_python_list(n):
+    python_list = []
+    start_time = time.time()
+    for i in range(n):
+        python_list.append(i)
+    end_time = time.time()
+    return end_time - start_time
+
+# Número de elementos a serem adicionados
+n = 100000
+
+# Medindo o tempo para My_Array
+my_array_time = test_my_array(n)
+print(f"Tempo para My_Array: {my_array_time:.6f} segundos")
+
+# Medindo o tempo para a lista do Python
+python_list_time = test_python_list(n)
+print(f"Tempo para lista do Python: {python_list_time:.6f} segundos")
+
+print("Note que a lista do python é mais rápida")
 
 a = My_Array()
 
@@ -51,8 +87,9 @@ class ToroArray:
 tr = ToroArray([10, 11, 12, 13, 14])
 
 '''''
-Exemplo, caso queira:
+Exemplos, caso queira:
 
 print(tr[6])
 print(tr[-20])   
 '''''
+
