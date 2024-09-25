@@ -25,6 +25,10 @@ class My_Array:
         return 'The array is {}'.format(self.array)
 
 a = My_Array()
+
+''''
+Exemplos, caso queira:
+
 a.append(2)    
 print(a)        
 a.append(3)
@@ -32,6 +36,8 @@ print(a)
 a.append(4)
 a.append(5)
 print(a)
+'''''
+
 
 #Question 2:
 
